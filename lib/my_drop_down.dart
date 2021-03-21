@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'constants.dart';
 
 class MyDropDown extends StatefulWidget {
@@ -9,7 +9,6 @@ class MyDropDown extends StatefulWidget {
 }
 
 class _MyDropDownState extends State<MyDropDown> {
-  String firstValue = 'Ward';
   String colon = ':';
   String sec, min, hours;
   int secInt;
@@ -52,6 +51,11 @@ class _MyDropDownState extends State<MyDropDown> {
             onChanged: (String newValue) {
               setState(() {
                 firstValue = newValue;
+                Alert(
+                  context: context,
+                  title: firstValue,
+                  desc: 'You chosed the name $firstValue',
+                ).show();
               });
             },
           ),
@@ -72,7 +76,7 @@ class _MyDropDownState extends State<MyDropDown> {
             Text(
               hours,
             ),
-            Text(colon),
+            Text(':'),
             Text(
               min,
             ),
