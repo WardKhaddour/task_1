@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -8,7 +10,19 @@ class MyDropDown extends StatefulWidget {
 
 class _MyDropDownState extends State<MyDropDown> {
   String firstValue = 'Ward';
+  String colon = ':';
+  String sec, min, hours;
+  int secInt;
   @override
+  void initState() {
+    hours = "${DateTime.now().hour} ";
+    min = '${DateTime.now().minute}';
+    sec = '${DateTime.now().second}';
+    secInt = DateTime.now().second;
+    Timer.periodic(Duration(seconds: 1), (Timer t) => getTime());
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +63,37 @@ class _MyDropDownState extends State<MyDropDown> {
           firstValue,
           style: kShownTextStyle,
         ),
+        SizedBox(
+          height: 300,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              hours,
+            ),
+            Text(colon),
+            Text(
+              min,
+            ),
+            Text(colon),
+            Text(
+              sec,
+            ),
+          ],
+        ),
       ],
     );
+  }
+
+  void getTime() {
+    setState(() {
+      colon = secInt % 2 == 0 ? ':' : ' ';
+
+      hours = '${DateTime.now().hour % 12}';
+      min = '${DateTime.now().minute}';
+      sec = '${DateTime.now().second}';
+      secInt = DateTime.now().second;
+    });
   }
 }
