@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:task_2/alert_screen.dart';
 import 'constants.dart';
 
 class MyDropDown extends StatefulWidget {
@@ -51,11 +51,20 @@ class _MyDropDownState extends State<MyDropDown> {
             onChanged: (String newValue) {
               setState(() {
                 firstValue = newValue;
-                Alert(
-                  context: context,
-                  title: firstValue,
-                  desc: 'You chosed the name $firstValue',
-                ).show();
+                // Alert(
+                //   context: context,
+                //   title: firstValue,
+                //   desc: 'You chosed the name $firstValue',
+                // ).show();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AlertScreen(
+                      title: firstValue,
+                      description: 'You chosed the name $firstValue',
+                    ),
+                  ),
+                );
               });
             },
           ),
